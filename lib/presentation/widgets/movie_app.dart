@@ -18,7 +18,7 @@ class MovieApp extends StatelessWidget {
         textTheme: ThemeText.getTextTheme(),
         appBarTheme: const AppBarTheme(elevation: 0),
       ),
-      home: HomeScreen(),
+      // home: HomeScreen(),
     );
   }
 }

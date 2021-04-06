@@ -10,7 +10,8 @@ class MovieAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          top: ScreenUtil.statusBarHeight + Sizes.dimen_4.h,
+          // Uncomment below line if desired UI is not achieved
+          // top: ScreenUtil.statusBarHeight + Sizes.dimen_4.h,
           left: Sizes.dimen_16.w,
           right: Sizes.dimen_16.w),
       child: Row(
