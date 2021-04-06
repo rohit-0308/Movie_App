@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/dependency_injections(di)/get_it.dart';
 import 'package:movies/presentation/bloc/movie_carousel/movie_carousel_bloc.dart';
+import 'package:movies/presentation/journeys/home/movie_carousel/movie_carousel_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   heightFactor: 0.6,
                   //Add MovieCarousel widget here to child
                   child: MovieCarouselWidget(
-                    movie: state.movies,
+                    movies: state.movies,
                     defaultIndex: state.defaultIndex,
                   ),
                 ),
