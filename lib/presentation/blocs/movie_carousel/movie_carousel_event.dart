@@ -13,5 +13,6 @@ class CarouselLoadEvent extends MovieCarouselEvent {
   const CarouselLoadEvent({this.defaultIndex = 0})
       : assert(defaultIndex >= 0, 'defaultIndex cannot be less than 0');
 
+  @override
   List<Object> get props => [defaultIndex];
 }

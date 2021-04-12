@@ -1,10 +1,7 @@
-import 'dart:convert';
+import 'package:movieapp/data/core/api_client.dart';
+import 'package:movieapp/data/models/movies_result_model.dart';
 
-import 'package:http/http.dart';
-import 'package:movies/data/core/api-constants.dart';
-import 'package:movies/data/core/api_client.dart';
-import 'package:movies/data/models/movie_model.dart';
-import 'package:movies/data/models/movies_results_model.dart';
+import '../models/movie_model.dart';
 
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getTrending();

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:movies/common/constants/size_constraints.dart';
-import 'package:movies/common/screenUtil/screenutil.dart';
-import 'package:movies/domain/entities/movie_entity.dart';
-import 'package:movies/presentation/journeys/home/movie_carousel/movie_card_widget.dart';
-import 'package:movies/common/extensions/size_extension.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../common/constants/size_constants.dart';
+import '../../../../common/extensions/size_extensions.dart';
+import '../../../../common/screenutil/screenutil.dart';
+import '../../../../domain/entities/movie_entity.dart';
+import '../../../blocs/movie_backdrop/movie_backdrop_bloc.dart';
+import 'animated_movie_card_widget.dart';
 
 class MoviePageView extends StatefulWidget {
   final List<MovieEntity> movies;
@@ -15,12 +18,14 @@ class MoviePageView extends StatefulWidget {
     @required this.initialPage,
   })  : assert(initialPage >= 0, 'initialPage cannot be less than 0'),
         super(key: key);
+
   @override
   _MoviePageViewState createState() => _MoviePageViewState();
 }
 
 class _MoviePageViewState extends State<MoviePageView> {
   PageController _pageController;
+
   @override
   void initState() {
     super.initState();
@@ -41,19 +46,24 @@ class _MoviePageViewState extends State<MoviePageView> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: Sizes.dimen_10.h),
-      //  height: ScreenUtil.screenHeight * 0.35,
+      height: ScreenUtil.screenHeight * 0.35,
       child: PageView.builder(
         controller: _pageController,
         itemBuilder: (context, index) {
           final MovieEntity movie = widget.movies[index];
-          return MovieCardWidget(
+          return AnimatedMovieCardWidget(
+            index: index,
+            pageController: _pageController,
             movieId: movie.id,
             posterPath: movie.posterPath,
           );
         },
         pageSnapping: true,
         itemCount: widget.movies?.length ?? 0,
-        onPageChanged: (index) {},
+        onPageChanged: (index) {
+          BlocProvider.of<MovieBackdropBloc>(context)
+              .add(MovieBackdropChangedEvent(widget.movies[index]));
+        },
       ),
     );
   }
