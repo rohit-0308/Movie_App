@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/common/extensions/size_extension.dart';
+import '../../common/extensions/size_extensions.dart';
 
 class Logo extends StatelessWidget {
   final double height;
@@ -7,7 +7,7 @@ class Logo extends StatelessWidget {
   const Logo({
     Key key,
     @required this.height,
-  })  : assert(height != null, 'height must not be   null'),
+  })  : assert(height != null, 'height must not be null'),
         assert(height > 0, 'height should be greater than 0'),
         super(key: key);
 

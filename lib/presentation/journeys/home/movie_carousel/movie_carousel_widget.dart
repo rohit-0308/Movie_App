@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:movies/domain/entities/movie_entity.dart';
-import 'package:movies/presentation/journeys/home/movie_carousel/movie_page_view.dart';
-import 'package:movies/presentation/widgets/movie_appbar.dart';
+import 'package:movieapp/domain/entities/movie_entity.dart';
+import 'package:movieapp/presentation/widgets/movie_app_bar.dart';
+import 'package:movieapp/presentation/widgets/separator.dart';
+
+import 'movie_backdrop_widget.dart';
+import 'movie_data_widget.dart';
+import 'movie_page_view.dart';
 
 class MovieCarouselWidget extends StatelessWidget {
   final List<MovieEntity> movies;
@@ -13,14 +17,23 @@ class MovieCarouselWidget extends StatelessWidget {
     @required this.defaultIndex,
   })  : assert(defaultIndex >= 0, 'defaultIndex cannot be less than 0'),
         super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
+      fit: StackFit.expand,
       children: [
-        MovieAppBar(),
-        MoviePageView(
-          movies: movies,
-          initialPage: defaultIndex,
+        MovieBackdropWidget(),
+        Column(
+          children: [
+            MovieAppBar(),
+            MoviePageView(
+              movies: movies,
+              initialPage: defaultIndex,
+            ),
+            MovieDataWidget(),
+            // Separator(),
+          ],
         ),
       ],
     );
